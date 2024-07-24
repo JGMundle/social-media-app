@@ -1,0 +1,78 @@
+/* :root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
+
+/* body{
+  background-color: rgba(192, 192, 192, 0.544);
+} */
+
+.SignUpOptions{
+  background-color: white;
+}
+
+
+.SignUpOptions:hover{
+  cursor: pointer;
+
+  background-color: rgba(244, 244, 244, 0.83);
+}
+
+
+/* Title and Feedback and Help */
+
+#TiKTokTitle:hover{
+  cursor: pointer;
+}
+
+#Feedback:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+
+/* Terms of service & Privacy policy */
+
+#TS{
+  text-decoration: none;
+}
+
+#TS:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+#Privacy{
+  text-decoration: none;
+}
+
+#Privacy:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+
+
+/* LoginSEU */
+
+.LogInWith{
+  text-decoration: none;
+}
+
+.LogInWith:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
