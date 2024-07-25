@@ -5,19 +5,25 @@ import LogInOptions from "./Components/LogInOptions";
 import LogInSEU from "./Components/LogInSEU";
 import SignUpSEU from "./Components/SignUpSEU"
 import SignUpOptions from "./Components/SignUpOptions";
+import Footer from "./Components/Footer";
+import Practice from "./Components/Practice";
+import HomePage from "./Components/HomePage";
 
 
 function App() {
   return (
     <Router>
-
-      <Routes>
+      <HomePage/>
+      {/* <Routes>
         <Route path="/" Component={LogInOptions} />
-        {/* <Route path="/signup" element={<SignUpOptions/>} />
-        <Route path="/phone-or-email" element={<SignUpSEU/>}/> */}
+        <Route path="/phone-or-email" Component={LogInSEU}/>
+        <Route path="/signup" Component={SignUpOptions} />
+        <Route path="/phone-or-email" Component={SignUpSEU}/>
       </Routes>
 
+      <Footer/> */}
     </Router>
+
   );
 }
 

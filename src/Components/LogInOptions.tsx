@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SignUpOptions from "./SignUpOptions";
+import LogInSEU from "./LogInSEU";
 
 const LogInOptions = () => {
   return (
@@ -11,7 +12,7 @@ const LogInOptions = () => {
         fontFamily: "arial",
       }}
     >
-      <h1>Sign up for TikTok</h1>
+      <h1>Log in to TikTok</h1>
 
       <p
         style={{
@@ -19,8 +20,8 @@ const LogInOptions = () => {
           marginTop: "2em",
         }}
       >
-        Create a profile, follow other accounts, make
-        <br /> your own videos, and more.
+        Manage your account, check notifications,<br></br> comment on videos,
+        and more.
       </p>
 
       <div
@@ -31,7 +32,8 @@ const LogInOptions = () => {
           justifyContent: "center",
         }}
       >
-        <button
+        <Link
+          to="/phone-or-email"
           style={{
             border: "1.5px solid  rgba(220, 217, 217, 0.66)",
             borderRadius: "0.6em",
@@ -46,7 +48,7 @@ const LogInOptions = () => {
           className="SignUpOptions"
         >
           Use phone / email / username
-        </button>
+        </Link>
 
         <button
           style={{
@@ -115,7 +117,7 @@ const LogInOptions = () => {
         <p>
           Already have an account?{" "}
           <Link
-            to="/"
+            to="/signup"
             style={{
               color: " rgb(254, 44, 85)",
               textDecoration: "none",
