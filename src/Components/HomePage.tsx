@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useState } from "react";
 import constants from "../config/constants";
 import { AiFillHome } from "react-icons/ai";
 import { FaRegCompass } from "react-icons/fa";
@@ -6,16 +6,25 @@ import { GoPeople } from "react-icons/go";
 import { RiLiveLine } from "react-icons/ri";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoSearchOutline } from "react-icons/io5";
+import { RiCopyrightLine } from "react-icons/ri";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { RxQuestionMarkCircled } from "react-icons/rx";
+import { MdDarkMode } from "react-icons/md";
+import { MdOutlineDarkMode } from "react-icons/md";
+import { RiPencilRulerLine } from "react-icons/ri";
+import { LiaLanguageSolid } from "react-icons/lia";
+
 import { IconContext, IconType } from "react-icons";
 
-
-
 interface SideOptionsKeys {
-  menuOption: string
-  icon: Partial<ReactElement>
+  menuOption: string;
+  icon: Partial<ReactElement>;
 }
 
+interface DropMenuOptions extends SideOptionsKeys {}
+
 const HomePage = () => {
+  const [dropdown, setDropdown] = useState<boolean>(false);
 
   const sideOptions: SideOptionsKeys[] = [
     { menuOption: "For You", icon: <AiFillHome /> },
@@ -25,25 +34,58 @@ const HomePage = () => {
     { menuOption: "Profile", icon: <IoPersonOutline /> },
   ];
 
-  const infoOptions = ["Company", "Program", "Terms & Policies"]
+  const dropMenu: DropMenuOptions[] = [
+    { menuOption: "Creative Tools", icon: <RiPencilRulerLine /> },
+    { menuOption: "English", icon: <LiaLanguageSolid /> },
+    { menuOption: "Feedback & Help", icon: <RxQuestionMarkCircled /> },
+    { menuOption: "Dark mode", icon: <MdDarkMode /> },
+  ];
+
+  const infoOptions = ["Company", "Program", "Terms & Policies"];
 
   return (
     <div>
-      <div className="px-5 py-3 border-b border-gray-400 display: flex flex-row justify-between">
+      <div className="px-5 py-3 border-b border-gray-400 display: flex flex-row justify-between items-center">
         <img src="src/Images/TikTokTitle.png" alt="TikTok" width={"10%"} />
 
-        <div className="rounded-full px-3 pl-3 w-96 bg-gray-200 display: flex flex-row justify-between items-center">
+        <div className="rounded-full first-line: w-96 bg-gray-200 display: flex flex-row justify-between items-center">
           <input
             type="text"
             placeholder="Search"
-            className="w-80 bg-inherit rounded-bl-full rounded-tl-full"
+            className="w-80 py-3 pl-3 bg-inherit rounded-bl-full rounded-tl-full"
           />
-          <div className="border-l border-gray-950 pl-2">
-            <IoSearchOutline />
+          <div className="border-l border-gray-400 pl-2 py-2">
+            <IoSearchOutline className="text-2xl mr-3" />
           </div>
         </div>
 
-        <button className="px-8 bg-default_red rounded-md">Log in</button>
+        <div className="display: flex flex-row items-center">
+          <button className="px-8 h-10 bg-default_red rounded-md text-white font-semibold">
+            Log in
+          </button>
+
+          <BsThreeDotsVertical
+            className="text-lg ml-5 hover: cursor-pointer"
+            onMouseEnter={() => setDropdown(true)}
+            onMouseLeave={() => {
+              setTimeout(() => {
+                setDropdown(false);
+              }, 10000);
+            }}
+          />
+
+          {dropdown && (
+            <div className="border border-slate-600 absolute top-20 ">
+              <ul>
+                {dropMenu.map((items, index) => (
+                  <li key={index} className="p-2 w-48">
+                    {items.icon as ReactNode}{items.menuOption}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
 
       <section id="sidebar">
@@ -54,14 +96,12 @@ const HomePage = () => {
             overflowX: "hidden",
 
             width: "25%",
-
-            border: "2px solid pink",
           }}
         >
           <div className="ml-5">
-            <ul className="border-b border-gray-300 w-28">
+            <ul className="border-b pb-4 border-gray-300 w-28">
               {sideOptions.map((items, index) => (
-                <div key={index} className="display:flex flex-row w-32">
+                <div key={index} className="display:flex flex-row w-40">
                   <li className="mt-5 font-bold text-xl">
                     {items.icon as ReactNode}
                     {items.menuOption}
@@ -70,18 +110,18 @@ const HomePage = () => {
               ))}
             </ul>
 
-            <p className="mt-7 text-gray-400">
+            <p className="mt-6 text-gray-400">
               Log in to follow creaters,
               <br /> like videos, and view
               <br /> comments
             </p>
 
-            <div className="display: flex flex-col w-60 border">
+            <div className="display: flex flex-col w-60">
               <button className="mt-4 py-3 px-20 border border-rose-500 rounded-md">
                 Log in
               </button>
 
-              <button className="mt-4 py-4 px-15 bg-black text-yellow-100 text-sm rounded-lg">
+              <button className="mt-10 py-4 px-15 bg-black text-yellow-100 text-sm rounded-lg">
                 Create TikTok effects, get a reward
               </button>
             </div>
@@ -97,8 +137,9 @@ const HomePage = () => {
               ))}
             </ul>
 
-            <div>
-              <p>2024 TikTok</p>
+            <div className="mt-1 display: flex flex-row">
+              <RiCopyrightLine className="text-gray-400" />
+              <p className="text-xs text-gray-400 ml-1">2024 TikTok</p>
             </div>
           </div>
         </div>
