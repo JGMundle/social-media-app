@@ -46,7 +46,12 @@ const HomePage = () => {
   return (
     <div>
       <div className="px-5 py-3 border-b border-gray-400 display: flex flex-row justify-between items-center">
-        <img src="src/Images/TikTokTitle.png" alt="TikTok" width={"10%"} />
+        <img
+          src="src/Images/TikTokTitle.png"
+          alt="TikTok"
+          width={"8%"}
+          className="hover: cursor-pointer"
+        />
 
         <div className="rounded-full first-line: w-96 bg-gray-200 display: flex flex-row justify-between items-center">
           <input
@@ -54,7 +59,7 @@ const HomePage = () => {
             placeholder="Search"
             className="w-80 py-3 pl-3 bg-inherit rounded-bl-full rounded-tl-full"
           />
-          <div className="border-l border-gray-400 pl-2 py-2">
+          <div className="border-l border-gray-400 pl-2 py-1">
             <IoSearchOutline className="text-2xl mr-3" />
           </div>
         </div>
@@ -75,11 +80,12 @@ const HomePage = () => {
           />
 
           {dropdown && (
-            <div className="border border-slate-600 absolute top-20 ">
+            <div className="border border-slate-600 absolute top-20 right-5 ">
               <ul>
                 {dropMenu.map((items, index) => (
-                  <li key={index} className="p-2 w-48">
-                    {items.icon as ReactNode}{items.menuOption}
+                  <li key={index} className="p-2 w-48 hover: cursor-pointer">
+                    {items.icon as ReactNode}
+                    {items.menuOption}
                   </li>
                 ))}
               </ul>
@@ -102,7 +108,7 @@ const HomePage = () => {
             <ul className="border-b pb-4 border-gray-300 w-28">
               {sideOptions.map((items, index) => (
                 <div key={index} className="display:flex flex-row w-40">
-                  <li className="mt-5 font-bold text-xl">
+                  <li className="mt-5 font-bold text-xl hover: cursor-pointer">
                     {items.icon as ReactNode}
                     {items.menuOption}
                   </li>
@@ -130,7 +136,7 @@ const HomePage = () => {
               {infoOptions.map((items, index) => (
                 <li
                   key={index}
-                  className="mt-4 font-bold text-ms text-gray-400"
+                  className="mt-4 font-bold text-ms text-gray-400 hover: cursor-pointer"
                 >
                   {items}
                 </li>
@@ -139,11 +145,15 @@ const HomePage = () => {
 
             <div className="mt-1 display: flex flex-row">
               <RiCopyrightLine className="text-gray-400" />
-              <p className="text-xs text-gray-400 ml-1">2024 TikTok</p>
+              <p className="text-xs text-gray-600 ml-1">2024 TikTok</p>
             </div>
           </div>
         </div>
       </section>
+
+      <button className="border border-gray-200 px-4 py-0.5 rounded-xl absolute right-14 bottom-8">
+        Get app
+      </button>
 
       {/* <section id="main-video section">
         <div>
