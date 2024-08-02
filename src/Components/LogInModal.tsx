@@ -1,9 +1,38 @@
+import { useState } from "react";
 import { Link, Routes, Route } from "react-router-dom";
+
 import LogInOptions from "./LogInOptions";
 
-const SignUpOptions = () => {
+import { IoCloseOutline } from "react-icons/io5";
+import { BsQuestionCircle } from "react-icons/bs";
+
+const LogInModal = () => {
+  const [change, setChange] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setChange(change === true);
+  };
+
   return (
-    <>
+    <div
+      style={{
+        backgroundColor: "gray",
+        textAlign: "center",
+        marginTop: "3em",
+
+        fontFamily: "arial",
+        width: "480px",
+        height: "720px",
+        position: "absolute",
+        top: 50,
+        left: 498,
+        right: 50,
+        bottom: 50,
+      }}
+    >
+        <IoCloseOutline className="size-9 relative left-3/4 top-5 ml-14  bg-slate-400 rounded-full" />
+
+
       <div
         style={{
           textAlign: "center",
@@ -12,17 +41,7 @@ const SignUpOptions = () => {
           fontFamily: "arial",
         }}
       >
-        <h1>Sign up for TikTok</h1>
-
-        <p
-          style={{
-            color: "rgba(22, 24, 35, 0.5)",
-            marginTop: "2em",
-          }}
-        >
-          Create a profile, follow other accounts, make
-          <br /> your own videos, and more.
-        </p>
+        <h1 className="mt-16 mb-9 text-3xl font-semibold">Log in to TikTok</h1>
 
         <div
           style={{
@@ -32,13 +51,13 @@ const SignUpOptions = () => {
             justifyContent: "center",
           }}
         >
-            <Link
-            to={"/phone-or-email"}
+          <Link
+            to="/phone-or-email"
             style={{
               border: "1.5px solid  rgba(220, 217, 217, 0.66)",
               borderRadius: "0.6em",
 
-              padding: "0.8em",
+              padding: "0.7em",
               marginBottom: "1em",
 
               paddingInline: "4em",
@@ -55,7 +74,7 @@ const SignUpOptions = () => {
               border: "1.5px solid  rgba(220, 217, 217, 0.66)",
               borderRadius: "0.6em",
 
-              padding: "0.8em",
+              padding: "0.7em",
 
               paddingInline: "5.4em",
 
@@ -73,7 +92,7 @@ const SignUpOptions = () => {
               border: "1.5px solid  rgba(220, 217, 217, 0.66)",
               borderRadius: "0.6em",
 
-              padding: "0.8em",
+              padding: "0.7em",
               marginBottom: "1em",
 
               paddingInline: "5.9em",
@@ -85,10 +104,46 @@ const SignUpOptions = () => {
             Continue with Google
           </button>
 
+          <button
+            style={{
+              border: "1.5px solid  rgba(220, 217, 217, 0.66)",
+              borderRadius: "0.6em",
+
+              padding: "0.7em",
+              marginBottom: "1em",
+
+              paddingInline: "6.1em",
+
+              fontSize: "1em",
+            }}
+            className="SignUpOptions"
+          >
+            Continue with Twitter
+          </button>
+
+          <button
+            style={{
+              border: "1.5px solid  rgba(220, 217, 217, 0.66)",
+              borderRadius: "0.6em",
+
+              padding: "0.7em",
+              marginBottom: "1em",
+
+              paddingInline: "6.4em",
+
+              fontSize: "1em",
+            }}
+            className="SignUpOptions"
+          >
+            Continue with Apple
+          </button>
+
           <p
             style={{
               color: "rgba(22, 24, 35, 0.5)",
               fontSize: "0.8em",
+
+              marginTop: "4em",
             }}
           >
             By continuing, you agree to TikTok’s{" "}
@@ -111,28 +166,27 @@ const SignUpOptions = () => {
             borderLeftColor: "transparent",
             borderRightColor: "transparent",
 
-            marginTop: "3em",
+            marginTop: "1em",
+            padding: "1em",
           }}
         >
           <p>
             Already have an account?{" "}
             <Link
-              to="/"
+              to="/signup"
               style={{
                 color: " rgb(254, 44, 85)",
                 textDecoration: "none",
                 fontWeight: "400",
               }}
             >
-              Log in
+              Sign up
             </Link>
           </p>
         </div>
       </div>
-
-  
-    </>
+    </div>
   );
 };
 
-export default SignUpOptions;
+export default LogInModal;

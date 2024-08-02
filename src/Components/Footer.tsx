@@ -1,4 +1,4 @@
-import React from 'react'
+import { LiaCopyrightSolid } from "react-icons/lia";
 
 const Footer = () => {
   return (
@@ -13,7 +13,7 @@ const Footer = () => {
         padding: "2em",
       }}
     >
-      <button
+      <select
         style={{
           backgroundColor: "#0f0f0f",
           color: "whitesmoke",
@@ -23,38 +23,33 @@ const Footer = () => {
           padding: "0.6em",
           paddingRight: "5em",
 
-          marginBottom: "1em",
-
           fontSize: "0.9em",
           textAlign: "left",
         }}
       >
-        Language option
-      </button>
+        <option>English</option>
+        <option>Español</option>
+        <option>Françias</option>
+        <option>日本語</option>
+      </select>
 
-      <p
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-
-          fontFamily: "arial",
-          color: "rgb(138, 139, 145)",
-
-          marginLeft: "30em",
-        }}
-      >
-        <img
-          src="src/Images/copyright_24dp_FILL0_wght300_GRAD0_opsz24.svg"
-          alt="Copyright"
+      <div className="display: flex flex-row items-center">
+        <LiaCopyrightSolid style={{ color: "rgb(138, 139, 145)", marginRight:"0.5em"}} />
+        <p
           style={{
-            marginRight: "0.4em",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+
+            fontFamily: "arial",
+            color: "rgb(138, 139, 145)",
           }}
-        />
-        2024 TikTok
-      </p>
+        >
+          2024 TikTok
+        </p>
+      </div>
     </footer>
   );
-}
+};
 
-export default Footer
+export default Footer;

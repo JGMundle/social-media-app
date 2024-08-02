@@ -43,7 +43,7 @@ const NavBar = () => {
         </div>
       </div>
 
-      <div className="display: flex flex-row items-center">
+      <div className="display: flex flex-row items-center mr-8">
         <button className="px-8 h-10 bg-default_red rounded-md text-white font-semibold">
           Log in
         </button>
@@ -62,10 +62,12 @@ const NavBar = () => {
           <div className="border border-slate-600 absolute top-20 right-5 ">
             <ul>
               {dropMenu.map((items, index) => (
-                <li key={index} className="p-2 w-48 hover: cursor-pointer">
-                  {items.icon as ReactNode}
-                  {items.menuOption}
-                </li>
+                <div key={index} className="display: flex flex-row items-center">
+                  <li>{items.icon as ReactNode}</li>
+                  <li className="p-2 w-44 hover: cursor-pointer">
+                    {items.menuOption}
+                  </li>
+                </div>
               ))}
             </ul>
           </div>

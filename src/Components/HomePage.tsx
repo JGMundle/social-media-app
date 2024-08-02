@@ -15,7 +15,6 @@ interface DropMenuOptions extends SideOptionsKeys {}
 
 const HomePage = () => {
 
-
   return (
     <div>
       <NavBar />
@@ -23,6 +22,8 @@ const HomePage = () => {
         <SideBar />
         <VideoSection />
       </div>
+
+      
       <motion.button
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 1.1 }}
