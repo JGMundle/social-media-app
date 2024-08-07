@@ -4,8 +4,12 @@ import { IoIosShareAlt } from 'react-icons/io';
 import VideoOptions from './VideoOptions';
 import { useState } from 'react';
 
-const VideoSection = () => {
-  const [isLoggedIn, setIsLogged ] = useState(false)
+
+interface Props {
+  isLoggedIn: boolean
+}
+const VideoSection = ({isLoggedIn}: Props) => {
+  
 
     const { scrollYProgress } = useScroll();
 

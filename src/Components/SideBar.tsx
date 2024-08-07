@@ -1,9 +1,9 @@
-import {ReactElement,  ReactNode } from 'react'
-import { AiFillHome } from 'react-icons/ai';
-import { FaRegCompass } from 'react-icons/fa';
-import { GoPeople } from 'react-icons/go';
-import { IoPersonOutline } from 'react-icons/io5';
-import { RiLiveLine, RiCopyrightLine } from 'react-icons/ri';
+import { ReactElement, ReactNode } from "react";
+import { AiFillHome } from "react-icons/ai";
+import { FaRegCompass } from "react-icons/fa";
+import { GoPeople } from "react-icons/go";
+import { IoPersonOutline } from "react-icons/io5";
+import { RiLiveLine, RiCopyrightLine } from "react-icons/ri";
 
 interface SideOptionsKeys {
   menuOption: string;
@@ -11,14 +11,13 @@ interface SideOptionsKeys {
 }
 
 const SideBar = () => {
-
-      const sideOptions: SideOptionsKeys[] = [
-        { menuOption: "For You", icon: <AiFillHome /> },
-        { menuOption: "Explore", icon: <FaRegCompass /> },
-        { menuOption: "Following", icon: <GoPeople /> },
-        { menuOption: "LIVE", icon: <RiLiveLine /> },
-        { menuOption: "Profile", icon: <IoPersonOutline /> },
-      ];
+  const sideOptions: SideOptionsKeys[] = [
+    { menuOption: "For You", icon: <AiFillHome className="size-6" /> },
+    { menuOption: "Explore", icon: <FaRegCompass className="size-6" /> },
+    { menuOption: "Following", icon: <GoPeople className="size-6" /> },
+    { menuOption: "LIVE", icon: <RiLiveLine className="size-6" /> },
+    { menuOption: "Profile", icon: <IoPersonOutline className="size-6" /> },
+  ];
 
   const infoOptions = ["Company", "Program", "Terms & Policies"];
 
@@ -36,12 +35,17 @@ const SideBar = () => {
       <div className="whitespace-nowrap">
         <ul className="pb-4 ">
           {sideOptions.map((items, index) => (
-              <div key={index} className="  mt-5 font-bold text-xl w-52 whitespace-nowrap display: flex flex-row items-center">
-                  <li className='w-8 whitespace-nowrap hover: cursor-pointer'>{items.icon as ReactNode}</li>
-                  <li className="w-12 whitespace-nowrap cursor-pointer">
-                    {items.menuOption}
-                  </li>
-              </div>
+            <div
+              key={index}
+              className="  mt-5 font-bold text-xl w-52 whitespace-nowrap display: flex flex-row items-center"
+            >
+              <li className="w-8 whitespace-nowrap hover: cursor-pointer">
+                {items.icon as ReactNode}
+              </li>
+              <li className="w-12 whitespace-nowrap cursor-pointer">
+                {items.menuOption}
+              </li>
+            </div>
           ))}
         </ul>
 
@@ -79,6 +83,6 @@ const SideBar = () => {
       </div>
     </div>
   );
-}
+};
 
-export default SideBar
+export default SideBar;

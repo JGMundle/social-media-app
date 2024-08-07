@@ -36,13 +36,14 @@ const VideoOptions = ({ isUserLoggedIn }: Props) => {
   }
 
   const toggleIcons = (btnIndex: number) => {
-    if (isUserLoggedIn) {
+    if (isUserLoggedIn === true) {
       btnIndex === 0 ? <FaHeart color="red" /> : <FaHeart />;
+   
     }
-    else {
-      setOpenModal(!openModal)
-    
+    else { 
+      <LogInModal />
     }
+  
   }
   return (
     <div className="border border-gray-600 display: flex flex-col justify-between h-80 w-20 items-center">
@@ -61,11 +62,7 @@ const VideoOptions = ({ isUserLoggedIn }: Props) => {
           </button>
         ))}
       </div>
-      {openModal && (
-        <div>
-          <LogInModal/>
-          </div>
-      )}
+   
     </div>
   );
 }

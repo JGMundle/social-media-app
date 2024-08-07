@@ -1,20 +1,49 @@
 import { useState, ReactElement, ReactNode } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { IoSearchOutline } from "react-icons/io5";
+import {
+  IoPersonOutline,
+  IoSearchOutline,
+  IoSettingsOutline,
+} from "react-icons/io5";
 import { LiaLanguageSolid } from "react-icons/lia";
-import { MdDarkMode } from "react-icons/md";
-import { RiPencilRulerLine } from "react-icons/ri";
+import { MdDarkMode, MdOutlineLogin } from "react-icons/md";
+import { RiPencilRulerLine, RiCopperCoinLine } from "react-icons/ri";
 import { RxQuestionMarkCircled } from "react-icons/rx";
+import { FiSend } from "react-icons/fi";
+import { BiCommentMinus } from "react-icons/bi";
+import { HiOutlinePlus } from "react-icons/hi";
+import { AiFillTikTok } from "react-icons/ai";
+import userProfile from "./UserProfile";
+
+import {
+  useNavigate,
+  useNavigation
+} from "react-router-dom";
+import { Flex, Avatar } from "@radix-ui/themes";
+
 
 interface SideOptionsKeys {
   menuOption: string;
   icon: Partial<ReactElement>;
 }
+interface Props {
+  isUserLoggedIn: boolean
+  sourceImg?: string
+}
+
+const name = "Juewell"
 
 interface DropMenuOptions extends SideOptionsKeys { }
 
-const NavBar = () => {
-    const [dropdown, setDropdown] = useState<boolean>(false);
+const NavBar = ({isUserLoggedIn, sourceImg}: Props) => {
+  const [dropdown, setDropdown] = useState<boolean>(false);
+  const [menuIndex, setMenuIndex] = useState<number|null >()
+  const navigator = useNavigate()
+
+  const [messageDialog, setMessageDialog] = useState<boolean>(false)
+  const [commentDialog, setCommentDialog] = useState<boolean>(false)
+  const [userDropdown, setUserDropdown] = useState<boolean>(false)
+  
 
       const dropMenu: DropMenuOptions[] = [
         { menuOption: "Creative Tools", icon: <RiPencilRulerLine /> },
@@ -22,6 +51,27 @@ const NavBar = () => {
         { menuOption: "Feedback & Help", icon: <RxQuestionMarkCircled /> },
         { menuOption: "Dark mode", icon: <MdDarkMode /> },
       ];
+  
+  const userDropMenu: DropMenuOptions[] = [
+    {
+      menuOption: "View Profile",
+      icon: <IoPersonOutline className="size-6" />,
+    },
+    { menuOption: "Get Coins", icon: <RiCopperCoinLine className="size-6" /> },
+    {
+      menuOption: "Creative Tools",
+      icon: <RiPencilRulerLine className="size-6" />,
+    },
+    { menuOption: "Settings", icon: <IoSettingsOutline className="size-6" /> },
+    { menuOption: "English", icon: <LiaLanguageSolid className="size-6" /> },
+    {
+      menuOption: "Feedback & Help",
+      icon: <RxQuestionMarkCircled className="size-6" />,
+    },
+    { menuOption: "Dark mode", icon: <MdDarkMode className="size-6" /> },
+    { menuOption: "Get app", icon: <AiFillTikTok className="size-6" /> },
+    { menuOption: "Log out", icon: <MdOutlineLogin className="size-6" /> },
+  ];
     
   return (
     <div className="py-3 border-b border-gray-400 display: flex flex-row justify-between items-center">
@@ -39,30 +89,107 @@ const NavBar = () => {
           className="w-80 py-3 pl-3 bg-inherit rounded-bl-full rounded-tl-full"
         />
         <div className="border-l border-gray-400 pl-2 py-1">
-          <IoSearchOutline className="text-2xl mr-3" />
+          <IoSearchOutline className="text-2xl mr-3 text-gray-400" />
         </div>
       </div>
 
-      <div className="display: flex flex-row items-center mr-8">
-        <button className="px-8 h-10 bg-default_red rounded-md text-white font-semibold">
-          Log in
-        </button>
+      <div className="mr-8">
+        {!isUserLoggedIn ? (
+          <div className="display: flex flex-row items-center">
+            <button className="px-8 h-10 bg-default_red rounded-md text-white font-semibold">
+              Log in
+            </button>
 
-        <BsThreeDotsVertical
-          className="text-lg ml-5 hover: cursor-pointer"
-          onMouseEnter={() => setDropdown(true)}
-          onMouseLeave={() => {
-            setTimeout(() => {
-              setDropdown(false);
-            }, 10000);
-          }}
-        />
+            <BsThreeDotsVertical
+              className="text-lg ml-5 hover: cursor-pointer"
+              onMouseEnter={() => setDropdown(true)}
+              onMouseLeave={() => {
+                setTimeout(() => {
+                  setDropdown(false);
+                }, 10000);
+              }}
+            />
+          </div>
+        ) : (
+          <div className="display: flex flex-row items-center justify-around">
+            <div
+              onClick={() => navigator("/uploadpage")}
+              className="display: flex flex-row items-center border border-gray-300 mr-7 px-4 py-1"
+            >
+              <HiOutlinePlus className="size-5 mr-2" />
+              <button className="text-lg">Upload</button>
+            </div>
 
+            <FiSend
+              onClick={() => navigator("/messagespage")}
+              onMouseEnter={() => setMessageDialog(true)}
+              onMouseLeave={() => setMessageDialog(false)}
+              className="mr-6 size-7 hover: cursor-pointer"
+            />
+            {messageDialog && (
+              <div className="absolute top-16 right-14 border bg-gray-500 text-white p-1 rounded-lg text-lg">
+                Messages
+              </div>
+            )}
+
+            <BiCommentMinus
+              onClick={() => console.log("Comment icon clicked")}
+              onMouseEnter={() => setCommentDialog(true)}
+              onMouseLeave={() => setCommentDialog(false)}
+              className="size-7 hover: cursor-pointer"
+            />
+            {commentDialog && (
+              <div className="absolute top-16 right-5 border bg-gray-500 text-white p-1 rounded-lg text-lg">
+                Inbox
+              </div>
+            )}
+
+            <Flex gap="2" className="ml-7">
+              <Avatar
+                src={sourceImg ? sourceImg : ""}
+                fallback={name.slice(0, 1).toUpperCase()}
+                onMouseEnter={() => setUserDropdown(true)}
+                  onMouseLeave={() => {
+                    setTimeout(() => setUserDropdown(false), 3000);
+                    }}
+                className="hover: cursor-pointer"
+              />
+              {/* <Avatar fallback="A" /> */}
+            </Flex>
+            {userDropdown && (
+              <div className="absolute right-4 top-20 p-4 bg-white rounded-md border border-gray-400">
+                <ul>
+                  {userDropMenu.map((items, index) => (
+                    <div
+                      key={index}
+                      onClick={() => console.log(userDropMenu.length)}
+                      className={`display: flex flex-row items-center ${
+                        index === userDropMenu.length - 1
+                          ? "border-t border-gray-300"
+                          : ""
+                      }`}
+                    >
+                      <li>{items.icon as ReactNode}</li>
+                      <li className="p-2">{items.menuOption}</li>
+                    </div>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
         {dropdown && (
-          <div className="border border-slate-600 absolute top-20 right-5 ">
+          <div className="absolute top-20 right-5 pl-4 bg-white rounded-md border border-gray-400">
             <ul>
               {dropMenu.map((items, index) => (
-                <div key={index} className="display: flex flex-row items-center">
+                <div
+                  key={index}
+                  className={`display: flex flex-row items-center ${
+                    index === menuIndex ? "hover: bg-gray-100" : ""
+                  }`}
+                  onMouseEnter={() => setMenuIndex(index)}
+                  onMouseLeave={() => setMenuIndex(null)}
+                >
                   <li>{items.icon as ReactNode}</li>
                   <li className="p-2 w-44 hover: cursor-pointer">
                     {items.menuOption}

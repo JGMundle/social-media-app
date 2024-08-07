@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { Link, Routes, Route } from "react-router-dom";
 
-import LogInOptions from "./LogInOptions";
+import LogInOptions from "./LogIn/LogInOptions";
 
 import { IoCloseOutline } from "react-icons/io5";
 import { BsQuestionCircle } from "react-icons/bs";
 
-const LogInModal = () => {
+interface Props {
+  showModal?: boolean
+  closeModal?: () => void
+}
+
+const LogInModal = ({showModal, closeModal}: Props) => {
   const [change, setChange] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -30,8 +35,10 @@ const LogInModal = () => {
         bottom: 50,
       }}
     >
-        <IoCloseOutline className="size-9 relative left-3/4 top-5 ml-14  bg-slate-400 rounded-full" />
-
+      <IoCloseOutline
+        onClick={closeModal}
+        className="size-9 relative left-3/4 top-5 ml-14 bg-slate-400 rounded-full hover: cursor-pointer"
+      />
 
       <div
         style={{
