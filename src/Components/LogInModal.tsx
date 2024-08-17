@@ -59,7 +59,7 @@ const LogInModal = ({showModal, closeModal}: Props) => {
           }}
         >
           <Link
-            to="/phone-or-email"
+            to="/logintest"
             style={{
               border: "1.5px solid  rgba(220, 217, 217, 0.66)",
               borderRadius: "0.6em",

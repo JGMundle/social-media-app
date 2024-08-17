@@ -10,6 +10,7 @@ import Footer from "./Components/Footer";
 import HomePage from "./Components/HomePage";
 import UploadPage from "./Components/UploadPage";
 import MessagesPage from "./Components/MessagesPage";
+import LoginPractice from "./Components/LogIn/LoginPractice";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <div style={{ boxSizing: "border-box" }}>
       <Router>
         <Routes>
+          <Route path="/logintest" Component={LoginPractice} />
           <Route path="/" Component={HomePage} />
           <Route path="/uploadpage" Component={UploadPage} />
           <Route path="/messagespage" Component={MessagesPage} />

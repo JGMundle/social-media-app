@@ -15,43 +15,54 @@ import { HiOutlinePlus } from "react-icons/hi";
 import { AiFillTikTok } from "react-icons/ai";
 import userProfile from "./UserProfile";
 
-import {
-  useNavigate,
-  useNavigation
-} from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
 import { Flex, Avatar } from "@radix-ui/themes";
-
+import AllActivities from "./InboxMenuViews/AllActivities";
+import Likes from "./InboxMenuViews/Likes";
+import Comments from "./InboxMenuViews/Comments";
+import MentionsAndTags from "./InboxMenuViews/MentionsAndTags";
+import Followers from "./InboxMenuViews/Followers";
 
 interface SideOptionsKeys {
   menuOption: string;
   icon: Partial<ReactElement>;
 }
 interface Props {
-  isUserLoggedIn: boolean
-  sourceImg?: string
+  isUserLoggedIn: boolean;
+  sourceImg?: string;
 }
 
-const name = "Juewell"
+const name = "Juewell";
 
-interface DropMenuOptions extends SideOptionsKeys { }
+interface DropMenuOptions extends SideOptionsKeys {}
 
-const NavBar = ({isUserLoggedIn, sourceImg}: Props) => {
+const NavBar = ({ isUserLoggedIn, sourceImg }: Props) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
-  const [menuIndex, setMenuIndex] = useState<number|null >()
-  const navigator = useNavigate()
+  const [menuIndex, setMenuIndex] = useState<number | null>();
+  const navigator = useNavigate();
 
-  const [messageDialog, setMessageDialog] = useState<boolean>(false)
-  const [commentDialog, setCommentDialog] = useState<boolean>(false)
-  const [userDropdown, setUserDropdown] = useState<boolean>(false)
-  
+  const [messageDialog, setMessageDialog] = useState<boolean>(false);
+  const [commentDialog, setCommentDialog] = useState<boolean>(false);
+  const [inboxModal, setInboxModal] = useState<boolean>(false);
+  const [userDropdown, setUserDropdown] = useState<boolean>(false);
 
-      const dropMenu: DropMenuOptions[] = [
-        { menuOption: "Creative Tools", icon: <RiPencilRulerLine /> },
-        { menuOption: "English", icon: <LiaLanguageSolid /> },
-        { menuOption: "Feedback & Help", icon: <RxQuestionMarkCircled /> },
-        { menuOption: "Dark mode", icon: <MdDarkMode /> },
-      ];
-  
+  const [inboxOptionsIndex, setInboxOptionsIndex] = useState<number>(0);
+
+  const NotificationOptions = [
+    "All Activity",
+    "Likes",
+    "Comments",
+    "Mentions and tags",
+    "Followers",
+  ];
+
+  const dropMenu: DropMenuOptions[] = [
+    { menuOption: "Creative Tools", icon: <RiPencilRulerLine /> },
+    { menuOption: "English", icon: <LiaLanguageSolid /> },
+    { menuOption: "Feedback & Help", icon: <RxQuestionMarkCircled /> },
+    { menuOption: "Dark mode", icon: <MdDarkMode /> },
+  ];
+
   const userDropMenu: DropMenuOptions[] = [
     {
       menuOption: "View Profile",
@@ -72,7 +83,7 @@ const NavBar = ({isUserLoggedIn, sourceImg}: Props) => {
     { menuOption: "Get app", icon: <AiFillTikTok className="size-6" /> },
     { menuOption: "Log out", icon: <MdOutlineLogin className="size-6" /> },
   ];
-    
+
   return (
     <div className="py-3 border-b border-gray-400 display: flex flex-row justify-between items-center">
       <img
@@ -114,7 +125,7 @@ const NavBar = ({isUserLoggedIn, sourceImg}: Props) => {
           <div className="display: flex flex-row items-center justify-around">
             <div
               onClick={() => navigator("/uploadpage")}
-              className="display: flex flex-row items-center border border-gray-300 mr-7 px-4 py-1"
+              className="display: flex flex-row items-center border border-gray-300 mr-7 px-4 py-1 hover:bg-gray-100"
             >
               <HiOutlinePlus className="size-5 mr-2" />
               <button className="text-lg">Upload</button>
@@ -127,20 +138,74 @@ const NavBar = ({isUserLoggedIn, sourceImg}: Props) => {
               className="mr-6 size-7 hover: cursor-pointer"
             />
             {messageDialog && (
-              <div className="absolute top-16 right-14 border bg-gray-500 text-white p-1 rounded-lg text-lg">
+              <div className="absolute top-16 right-32 border bg-gray-500 text-white p-1 rounded-lg text-lg">
                 Messages
               </div>
             )}
 
             <BiCommentMinus
-              onClick={() => console.log("Comment icon clicked")}
+              onClick={() => {
+                setCommentDialog(false);
+                setInboxModal(true);
+              }}
               onMouseEnter={() => setCommentDialog(true)}
               onMouseLeave={() => setCommentDialog(false)}
               className="size-7 hover: cursor-pointer"
             />
             {commentDialog && (
-              <div className="absolute top-16 right-5 border bg-gray-500 text-white p-1 rounded-lg text-lg">
+              <div className="absolute top-16 right-20 border bg-gray-500 text-white p-1 rounded-lg text-lg">
                 Inbox
+              </div>
+            )}
+
+            {inboxModal && (
+              <div
+                className="absolute top-20 right-10 border bg-white rounded-lg p-3"
+                style={{ height: "600px", width: "400px" }}
+              >
+                <h1 className="text-2xl font-bold mt-3">Notifications</h1>
+
+                <div
+                  style={{
+                    height: "20%",
+                    border: "1px solid red",
+                    marginTop: "1em",
+                    marginBottom: "0.5em",
+                  }}
+                >
+                  <ul>
+                    {NotificationOptions.map((items, index) => (
+                      <li
+                        onClick={() => setInboxOptionsIndex(index)}
+                        id="notifications__menu"
+                        style={{
+                          width: index === 3 ? "40%" : "25%",
+                          whiteSpace: index === 3 ? "nowrap" : "none",
+                          backgroundColor:
+                            inboxOptionsIndex === index ? "#0f0f0f" : "",
+                          color:
+                            inboxOptionsIndex === index ? "whitesmoke" : "",
+                        }}
+                        className=" bg-gray-200 p-0 hover:bg-gray-300 cursor-pointer rounded-full text-center font-semibold text-sm"
+                      >
+                        {items}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {inboxOptionsIndex === 0 ? (
+                  <AllActivities />
+                ) : inboxOptionsIndex === 1 ? (
+                  <Likes />
+                ) : inboxOptionsIndex === 2 ? (
+                  <Comments />
+                ) : inboxOptionsIndex === 3 ? (
+                  <MentionsAndTags />
+                ) : inboxOptionsIndex === 4 ? (
+                  <Followers />
+                ) : (
+                  ""
+                )}
               </div>
             )}
 
@@ -149,9 +214,9 @@ const NavBar = ({isUserLoggedIn, sourceImg}: Props) => {
                 src={sourceImg ? sourceImg : ""}
                 fallback={name.slice(0, 1).toUpperCase()}
                 onMouseEnter={() => setUserDropdown(true)}
-                  onMouseLeave={() => {
-                    setTimeout(() => setUserDropdown(false), 3000);
-                    }}
+                onMouseLeave={() => {
+                  setTimeout(() => setUserDropdown(false), 3000);
+                }}
                 className="hover: cursor-pointer"
               />
               {/* <Avatar fallback="A" /> */}
@@ -167,7 +232,7 @@ const NavBar = ({isUserLoggedIn, sourceImg}: Props) => {
                         index === userDropMenu.length - 1
                           ? "border-t border-gray-300"
                           : ""
-                      }`}
+                      } hover:bg-gray-100 cursor-pointer`}
                     >
                       <li>{items.icon as ReactNode}</li>
                       <li className="p-2">{items.menuOption}</li>
@@ -202,6 +267,6 @@ const NavBar = ({isUserLoggedIn, sourceImg}: Props) => {
       </div>
     </div>
   );
-}
+};
 
-export default NavBar
+export default NavBar;

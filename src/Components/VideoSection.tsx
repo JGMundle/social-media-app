@@ -2,15 +2,17 @@ import { motion, useScroll } from 'framer-motion';
 import { FaHeart, FaCommentDots, FaBookmark } from 'react-icons/fa';
 import { IoIosShareAlt } from 'react-icons/io';
 import VideoOptions from './VideoOptions';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 interface Props {
   isLoggedIn: boolean
 }
 const VideoSection = ({isLoggedIn}: Props) => {
-  
-
+  const [videoLikes, setVideoLikes] = useState<number>(0)
+  useEffect(() => {
+    console.log("Likes are being updated from the backend")
+  }, [videoLikes])
     const { scrollYProgress } = useScroll();
 
     return (
@@ -31,13 +33,12 @@ const VideoSection = ({isLoggedIn}: Props) => {
               src="src/assets/video1.mp4"
               className=" rounded-lg"
               width={"51%"}
-              controls={true}
             />
 
             <VideoOptions isUserLoggedIn={isLoggedIn} />
           </div>
 
-          <div className="display: flex flex-row items-end">
+          {/* <div className="display: flex flex-row items-end">
             <video autoPlay={false} src="src/assets/video2.mp4" width={"51%"} />
             <VideoOptions isUserLoggedIn={isLoggedIn} />
           </div>
@@ -55,7 +56,7 @@ const VideoSection = ({isLoggedIn}: Props) => {
           <div className="display: flex flex-row items-end">
             <video autoPlay={false} src="src/assets/video5.mp4" width={"51%"} />
             <VideoOptions isUserLoggedIn={isLoggedIn} />
-          </div>
+          </div> */}
         </div>
         <motion.div style={{ scaleX: scrollYProgress }} />
       </>

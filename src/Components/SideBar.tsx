@@ -29,6 +29,8 @@ const SideBar = () => {
         overflowX: "hidden",
 
         width: "25%",
+        border: "pink solid 3px",
+        marginLeft: "-4em"
       }}
       id="sidebar"
     >
@@ -37,7 +39,7 @@ const SideBar = () => {
           {sideOptions.map((items, index) => (
             <div
               key={index}
-              className="  mt-5 font-bold text-xl w-52 whitespace-nowrap display: flex flex-row items-center"
+              className="  mt-5 font-bold text-xl w-52 whitespace-nowrap display: flex flex-row items-center hover:bg-gray-100"
             >
               <li className="w-8 whitespace-nowrap hover: cursor-pointer">
                 {items.icon as ReactNode}
