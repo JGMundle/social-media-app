@@ -8,7 +8,7 @@ import SignUpOptions from "./Components/SignUp/SignUpOptions";
 import Footer from "./Components/Footer";
 
 import HomePage from "./Components/HomePage";
-import UploadPage from "./Components/UploadPage";
+import UploadPage from "./Components/Upload/UploadPage";
 import MessagesPage from "./Components/MessagesPage";
 import LoginPractice from "./Components/LogIn/LoginPractice";
 
@@ -27,6 +27,8 @@ function App() {
           <Route path="/phone-or-email" Component={LogInSEU} />
           <Route path="/signup" Component={SignUpOptions} />
           <Route path="/phone-or-email" Component={SignUpSEU} />
+
+          
         </Routes>
       </Router>
     </div>

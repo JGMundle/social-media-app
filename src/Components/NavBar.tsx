@@ -15,7 +15,7 @@ import { HiOutlinePlus } from "react-icons/hi";
 import { AiFillTikTok } from "react-icons/ai";
 import userProfile from "./UserProfile";
 
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Flex, Avatar } from "@radix-ui/themes";
 import AllActivities from "./InboxMenuViews/AllActivities";
 import Likes from "./InboxMenuViews/Likes";
@@ -34,12 +34,16 @@ interface Props {
 
 const name = "Juewell";
 
-interface DropMenuOptions extends SideOptionsKeys {}
+export interface DropMenuOptions extends SideOptionsKeys {}
 
 const NavBar = ({ isUserLoggedIn, sourceImg }: Props) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const [menuIndex, setMenuIndex] = useState<number | null>();
+
+
   const navigator = useNavigate();
+
+  const uploader = useNavigate();
 
   const [messageDialog, setMessageDialog] = useState<boolean>(false);
   const [commentDialog, setCommentDialog] = useState<boolean>(false);
@@ -146,7 +150,7 @@ const NavBar = ({ isUserLoggedIn, sourceImg }: Props) => {
             <BiCommentMinus
               onClick={() => {
                 setCommentDialog(false);
-                setInboxModal(true);
+                setInboxModal(!inboxModal);
               }}
               onMouseEnter={() => setCommentDialog(true)}
               onMouseLeave={() => setCommentDialog(false)}

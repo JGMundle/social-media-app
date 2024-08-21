@@ -20,6 +20,7 @@ interface SocialIcons {
 const VideoOptions = ({ isUserLoggedIn }: Props) => {
   
   const [isLiked, setIsLiked] = useState(false)
+  const [isBookMarked, setIsBookMarked] = useState(false)
   const [openModal, setOpenModal] = useState(false)
 
   const [likesCount, setLikesCount] = useState<number>(13849)
@@ -44,11 +45,33 @@ const VideoOptions = ({ isUserLoggedIn }: Props) => {
   // const dummyElement = useRef<HTMLHeadingElement>(null)
   
   const socialButtons: SocialIcons[] = [
-    { icon: <FaHeart className='size-5'/>, counts: likesCount},
-    { icon: <FaCommentDots className='size-5'/>, counts: commentCount },
-    { icon: <FaBookmark className='size-5'/>, counts: bookmarkCount },
-    { icon: <IoIosShareAlt className='size-5'/>, counts: shareCount },
-  ]
+    {
+      icon: (
+        <FaHeart
+          onClick={() => setIsLiked(!isLiked)}
+          color={isLiked ? "red" : ""}
+          className="size-5"
+        />
+      ),
+      counts: likesCount,
+    },
+
+    { icon: <FaCommentDots className="size-5" />, counts: commentCount },
+    {
+      icon: (
+        <FaBookmark
+          onClick={() => setIsBookMarked(!isBookMarked)}
+          color={isBookMarked ? "yellow" : ""}
+          className="size-5"
+        />
+      ),
+      counts: bookmarkCount,
+    },
+    {
+      icon: <IoIosShareAlt className="size-5" />,
+      counts: shareCount,
+    },
+  ];
 
   const handleClick = (btnIndex: number) => {
     if (iconRefs.current)

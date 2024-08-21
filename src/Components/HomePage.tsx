@@ -6,6 +6,7 @@ import SideBar from "./SideBar";
 import VideoSection from "./VideoSection";
 import VideoOptions from "./VideoOptions";
 import LogInModal from "./LogInModal";
+import { useNavigate } from "react-router-dom";
 
 interface SideOptionsKeys {
   menuOption: string;
@@ -20,25 +21,25 @@ const HomePage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
-  const handleUserSession = () => {
-    localStorage.setItem("user-login-token", "tiktok-user-juewell");
-    const userLoginToken = localStorage.getItem("user-login-token");
+  // const handleUserSession = () => {
+  //   localStorage.setItem("user-login-token", "tiktok-user-juewell");
+  //   const userLoginToken = localStorage.getItem("user-login-token");
 
-    if (userLoginToken !== "guest") {
-      setTimeout(() => {
-        setShowModal(false);
-        setIsLoggedIn(true);
-      }, 5000);
-    }
+  //   if (userLoginToken !== "guest") {
+  //     setTimeout(() => {
+  //       setShowModal(false);
+  //       setIsLoggedIn(true);
+  //     }, 5000);
+  //   }
 
-    if (userLoginToken === "user-login-token") {
-      setTimeout(() => {
-        localStorage.removeItem("user-login-token");
-        setIsLoggedIn(false);
-        setShowModal(true);
-      });
-    }
-  };
+  //   if (userLoginToken === "user-login-token") {
+  //     setTimeout(() => {
+  //       localStorage.removeItem("user-login-token");
+  //       setIsLoggedIn(false);
+  //       setShowModal(true);
+  //     });
+  //   }
+  // };
 
   // useEffect(() => {
   //   handleUserSession();
@@ -48,7 +49,7 @@ const HomePage = () => {
     <div>
       <NavBar isUserLoggedIn={isLoggedIn} sourceImg={src} />
       <div className="border border-gray-800 display: flex flex-row justify-evenly">
-        <SideBar />
+        <SideBar profileImg={src} isUserLoggedIn={isLoggedIn} />
         <VideoSection isLoggedIn={isLoggedIn} />
         {showModal && <LogInModal closeModal={() => setShowModal(false)} />}
       </div>
