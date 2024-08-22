@@ -12,9 +12,7 @@ const MessagesPage = () => {
   const navigator = useNavigate();
 
   return (
-    <div>
-      <NavBar isUserLoggedIn={isLoggedIn} sourceImg={src} />
-
+    <div style={{ height: "95%" }}>
       <div className="display: flex flex-row justify-evenly mt-4">
         <div className="display: flex flex-row">
           <IoArrowBack
@@ -22,8 +20,8 @@ const MessagesPage = () => {
             className="size-6 mr-6 hover: cursor-pointer"
           />
 
-          <div className="border border-gray-400 ">
-            <div className="display: flex flex-row items-center w-80">
+          <div className="border border-red-600  " style={{ height: "90vh" }}>
+            <div className="display: flex flex-row items-center w-80 max-h-96">
               <h1 className="text-2xl font-bold ml-3">Messages</h1>
               <IoSettingsOutline className="size-6 ml-40 hover: cursor-pointer" />
             </div>

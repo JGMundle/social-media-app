@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaRegCompass } from "react-icons/fa";
 import { GoPeople } from "react-icons/go";
@@ -14,9 +14,11 @@ interface SideOptionsKeys {
 interface Props {
   isUserLoggedIn: boolean
   profileImg: string
+  
 }
 
 const SideBar = ({ isUserLoggedIn, profileImg }: Props) => {
+  const [menuIndex, setMenuIndex] = useState<number>()
   
   const sideOptions: SideOptionsKeys[] = [
     { menuOption: "For You", icon: <AiFillHome className="size-6" /> },
@@ -53,7 +55,7 @@ const SideBar = ({ isUserLoggedIn, profileImg }: Props) => {
 
         width: "25%",
         border: "pink solid 3px",
-        marginLeft: "-4em",
+        marginLeft: "0em",
       }}
       id="sidebar"
     >
@@ -64,6 +66,10 @@ const SideBar = ({ isUserLoggedIn, profileImg }: Props) => {
           {sideOptions.map((items, index) => (
             <div
               key={index}
+              onClick={() => {
+                setMenuIndex(index)
+                
+              }}
               className={`${index === 3 && !isUserLoggedIn ? "absolute" : "" }   mt-5 font-bold text-xl w-52 whitespace-nowrap display: flex flex-row items-center hover:bg-gray-100`}
             >
               <li className="w-8 whitespace-nowrap hover: cursor-pointer">

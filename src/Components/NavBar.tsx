@@ -30,20 +30,21 @@ interface SideOptionsKeys {
 interface Props {
   isUserLoggedIn: boolean;
   sourceImg?: string;
+  _onLoggedOut: () => void
+  _onLoggedIn: () => void
 }
 
 const name = "Juewell";
 
 export interface DropMenuOptions extends SideOptionsKeys {}
 
-const NavBar = ({ isUserLoggedIn, sourceImg }: Props) => {
+const NavBar = ({ isUserLoggedIn, sourceImg, _onLoggedOut, _onLoggedIn }: Props) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const [menuIndex, setMenuIndex] = useState<number | null>();
+  const [loggedOut, setIsLoggedOut] = useState<boolean>()
 
 
   const navigator = useNavigate();
-
-  const uploader = useNavigate();
 
   const [messageDialog, setMessageDialog] = useState<boolean>(false);
   const [commentDialog, setCommentDialog] = useState<boolean>(false);
@@ -89,7 +90,7 @@ const NavBar = ({ isUserLoggedIn, sourceImg }: Props) => {
   ];
 
   return (
-    <div className="py-3 border-b border-gray-400 display: flex flex-row justify-between items-center">
+    <div className=" py-3 border-b border-gray-400 display: flex flex-row justify-between items-center">
       <img
         src="src/Images/TikTokTitle.png"
         alt="TikTok"
@@ -111,7 +112,7 @@ const NavBar = ({ isUserLoggedIn, sourceImg }: Props) => {
       <div className="mr-8">
         {!isUserLoggedIn ? (
           <div className="display: flex flex-row items-center">
-            <button className="px-8 h-10 bg-default_red rounded-md text-white font-semibold">
+            <button onClick={() => _onLoggedIn()} className="px-8 h-10 bg-default_red rounded-md text-white font-semibold">
               Log in
             </button>
 
@@ -213,6 +214,8 @@ const NavBar = ({ isUserLoggedIn, sourceImg }: Props) => {
               </div>
             )}
 
+              {/* Profile picture */}
+
             <Flex gap="2" className="ml-7">
               <Avatar
                 src={sourceImg ? sourceImg : ""}
@@ -231,12 +234,19 @@ const NavBar = ({ isUserLoggedIn, sourceImg }: Props) => {
                   {userDropMenu.map((items, index) => (
                     <div
                       key={index}
-                      onClick={() => console.log(userDropMenu.length)}
+                      onClick={() => {
+                        if (index === userDropMenu.length - 1) {
+                          setIsLoggedOut(true)
+                          _onLoggedOut()
+                          console.log("Has been clicked")
+                        }
+                      }}
                       className={`display: flex flex-row items-center ${
                         index === userDropMenu.length - 1
                           ? "border-t border-gray-300"
                           : ""
                       } hover:bg-gray-100 cursor-pointer`}
+
                     >
                       <li>{items.icon as ReactNode}</li>
                       <li className="p-2">{items.menuOption}</li>
